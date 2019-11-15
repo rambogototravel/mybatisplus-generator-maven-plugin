@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.github.rambo</groupId>
+    <artifactId>mybatisplus-generator-maven-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
+    <version>1.0.0</version>
+    <name>mybatisplus-generator-maven-plugin Maven Mojo</name>
+    <url>http://maven.apache.org</url>
+
+    <!--<prerequisites>
+        <maven>3.6.0</maven>
+    </prerequisites>-->
+
+    <properties>
+        <!-- Compiler settings properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <maven.plugin.version>3.6.0</maven.plugin.version>
+    </properties>
+
+    <dependencies>
+        <!--  -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${maven.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${maven.plugin.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>${maven.plugin.version}</version>
+        </dependency>
+
+        <!-- start -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.2.0.RELEASE</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <optional>true</optional>
+            <version>8.0.15</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/*.vm</include>
+                </includes>
+                <targetPath>${project.build.outputDirectory}</targetPath>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>${maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.github.rambo</groupId>
+                <artifactId>mybatisplus-generator-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <dataSourceConfig>
+                        <driverName>com.mysql.cj.jdbc.Driver</driverName>
+                        <url>jdbc:mysql://localhost:3306/blade_member</url>
+                        <username>root</username>
+                        <password>root</password>
+                    </dataSourceConfig>
+                    <globalConfig>
+                        <outputDir>/home/ramboy/Desktop</outputDir>
+                        <baseResultMap>true</baseResultMap>
+                    </globalConfig>
+                    <packageConfig>
+                        <parent>com.lambo.blade</parent>
+                        <moduleName>member</moduleName>
+                        <entity>dao.entity</entity>
+                        <mapper>dao.mapper</mapper>
+                        <xml>dao.mapper.xml</xml>
+                        <service>service</service>
+                        <serviceImpl>service.impl</serviceImpl>
+                        <controller>web.controller</controller>
+                    </packageConfig>
+                    <strategyConfig>
+                        <naming>underline_to_camel</naming>
+                        <entityLombokModel>true</entityLombokModel>
+                        <entityBooleanColumnRemoveIsPrefix>true</entityBooleanColumnRemoveIsPrefix>
+                        <tablePrefix>
+                            <property>member_</property>
+                        </tablePrefix>
+                        <include>
+                            <property>member_user</property>
+                        </include>
+                    </strategyConfig>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
