@@ -8,10 +8,6 @@
     <name>mybatisplus-generator-maven-plugin Maven Mojo</name>
     <url>http://maven.apache.org</url>
 
-    <!--<prerequisites>
-        <maven>3.6.0</maven>
-    </prerequisites>-->
-
     <properties>
         <!-- Compiler settings properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +19,6 @@
     </properties>
 
     <dependencies>
-        <!--  -->
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
@@ -52,20 +47,13 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
+            <artifactId>spring-context</artifactId>
             <version>5.2.0.RELEASE</version>
-            <scope>compile</scope>
             <optional>true</optional>
+            <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
-        </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -106,17 +94,18 @@
                 <configuration>
                     <dataSourceConfig>
                         <driverName>com.mysql.cj.jdbc.Driver</driverName>
-                        <url>jdbc:mysql://localhost:3306/blade_member</url>
+                        <url>jdbc:mysql://192.168.101.250:3306/saber4j?serverTimezone=UTC</url>
                         <username>root</username>
                         <password>root</password>
                     </dataSourceConfig>
                     <globalConfig>
-                        <outputDir>/home/ramboy/Desktop</outputDir>
+                        <outputDir>/src/main/java</outputDir>
                         <baseResultMap>true</baseResultMap>
+                        <swagger2>true</swagger2>
                     </globalConfig>
                     <packageConfig>
-                        <parent>com.lambo.blade</parent>
-                        <moduleName>member</moduleName>
+                        <parent>org.saber4j</parent>
+                        <moduleName>hrms</moduleName>
                         <entity>dao.entity</entity>
                         <mapper>dao.mapper</mapper>
                         <xml>dao.mapper.xml</xml>
@@ -124,15 +113,18 @@
                         <serviceImpl>service.impl</serviceImpl>
                         <controller>web.controller</controller>
                     </packageConfig>
+                    <templateConfig>
+                        <entity>/templates/entity.java</entity>
+                    </templateConfig>
                     <strategyConfig>
                         <naming>underline_to_camel</naming>
                         <entityLombokModel>true</entityLombokModel>
                         <entityBooleanColumnRemoveIsPrefix>true</entityBooleanColumnRemoveIsPrefix>
                         <tablePrefix>
-                            <property>member_</property>
+                            <property>hrms_</property>
                         </tablePrefix>
                         <include>
-                            <property>member_user</property>
+                            <property>hrms_post</property>
                         </include>
                     </strategyConfig>
                 </configuration>

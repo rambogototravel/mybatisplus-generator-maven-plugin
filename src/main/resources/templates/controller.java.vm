@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * </p>
  *
  * @author ${author}
- * @date ${date}
  */
 @Controller
 @RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/${table.entityName.toLowerCase()}")

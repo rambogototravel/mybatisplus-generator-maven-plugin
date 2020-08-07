@@ -9,7 +9,6 @@ import ${superMapperClassPackage};
  * </p>
  *
  * @author ${author}
- * @date ${date}
  */
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 

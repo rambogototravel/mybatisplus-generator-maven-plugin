@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.annotations.TableField;
 #if(${addTabeName})
 import com.baomidou.mybatisplus.annotations.TableName;
 #end
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 #if(${table.hasDate})
 import java.util.Date;
@@ -18,12 +20,12 @@ import java.util.Date;
 
 /**
  * <p>
- * ${table.comment}
+ * ${table.comment} asdfa
  * </p>
  *
  * @author ${author}
- * @date ${date}
  */
+@ApiModel("${table.comment}")
 #if(${addTabeName})
 @TableName("${table.name}")
 #end
@@ -39,6 +41,7 @@ public class ${entity} implements Serializable {
         /**
          * ${field.comment}
          */
+        @ApiModelProperty("${field.comment}")
         #if(${field.keyFlag} && ${idGenType}!="ID_WORKER")
         @TableId(type = IdType.${idGenType})
         #end

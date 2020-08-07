@@ -9,7 +9,6 @@ import ${superServiceClassPackage};
  * </p>
  *
  * @author ${author}
- * @date ${date}
  */
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 	
